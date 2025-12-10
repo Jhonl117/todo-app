@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 const [nuevoTodo, setNuevoTodo] = useState("");
+const [loading, setLoading] = useState(true);
+
 export default function Todos() {
 
     const [todos, setTodos] = useState([]);
@@ -85,3 +87,17 @@ function toggleComplete(id) {
 function eliminar(id) {
   setTodos(todos.filter(t => t.id !== id));
 }
+
+useEffect(() => {
+  async function loadTodos() {
+    setLoading(true);
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
+    const data = await res.json();
+    setTodos(data);
+    setLoading(false);
+  }
+  loadTodos();
+}, []);
+
+if (loading) return <p>Cargando...</p>;
+
