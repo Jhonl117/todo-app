@@ -79,3 +79,9 @@ function toggleComplete(id) {
     t.id === id ? { ...t, completed: !t.completed } : t
   ));
 }
+
+<button onClick={() => eliminar(todo.id)}>Eliminar</button>
+
+function eliminar(id) {
+  setTodos(todos.filter(t => t.id !== id));
+}
