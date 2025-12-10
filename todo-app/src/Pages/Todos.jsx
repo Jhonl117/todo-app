@@ -51,3 +51,18 @@ function handleSubmit(e) {
     setTodos([nuevo, ...todos]);
     setNuevoTodo("");
 }
+
+
+<li key={todo.id}>
+  {todo.title}
+  <button onClick={() => toggleComplete(todo.id)}>
+    {todo.completed ? "Marcar pendiente" : "Marcar completado"}
+  </button>
+</li>
+
+function toggleComplete(id) {
+  setTodos(todos.map(t =>
+    t.id === id ? { ...t, completed: !t.completed } : t
+  ));
+}
+
