@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 const [nuevoTodo, setNuevoTodo] = useState("");
 const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
 
 export default function Todos() {
 
@@ -100,4 +101,42 @@ useEffect(() => {
 }, []);
 
 if (loading) return <p>Cargando...</p>;
+
+
+
+useEffect(() => {
+  async function load() {
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
+      if (!res.ok) throw new Error("Error al cargar");
+      const data = await res.json();
+      setTodos(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  load();
+}, []);
+
+
+
+useEffect(() => {
+  async function load() {
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
+      if (!res.ok) throw new Error("Error al cargar");
+      const data = await res.json();
+      setTodos(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  load();
+}, []);
+
+if (error) return <p>Error: {error}</p>;
 
