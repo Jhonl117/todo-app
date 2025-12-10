@@ -12,8 +12,14 @@ export default function Todos() {
 
   return (
     <div>
-      <h1>Listado de TODOS</h1>
-      <pre>{JSON.stringify(todos, null, 2)}</pre>
-    </div>
+    <h1>Listado de TODOS</h1>
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          {todo.title} - {todo.completed ? "✔" : "❌"}
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 }
