@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 const [nuevoTodo, setNuevoTodo] = useState("");
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
+const [filtro, setFiltro] = useState("todos"); // placeholder
 
 export default function Todos() {
 
@@ -139,4 +140,14 @@ useEffect(() => {
 }, []);
 
 if (error) return <p>Error: {error}</p>;
+
+
+<div style={{ marginBottom: "1rem" }}>
+  <button onClick={() => setFiltro("todos")}>Todos</button>
+  <button onClick={() => setFiltro("completados")}>Completados</button>
+  <button onClick={() => setFiltro("pendientes")}>Pendientes</button>
+
+  <p>Filtro seleccionado: {filtro}</p>
+</div>
+
 
